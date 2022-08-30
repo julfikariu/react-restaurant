@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import DISHES from '../../data/dishes.js';
 import MenuItem from './MenuItem'
+import DishDetail from './DishDetail.js';
 
 class Menu extends Component {
     state = {
-        dishes: DISHES
+        dishes: DISHES,
+        selectedDish: null
+    }
+
+    DeshDetail = (dish) => {
+
+        this.setState({
+            selectedDish: dish
+        });
+
+
     }
 
 
@@ -12,9 +23,14 @@ class Menu extends Component {
 
         const menu = this.state.dishes.map(item => {
             return (
-                <MenuItem dish={item} key={item.id} />
+                <MenuItem dish={item} key={item.id} deshDetail={() => this.DeshDetail(item)} />
             );
         });
+
+        let dishdetails = null;
+        if (this.state.selectedDish != null) {
+            dishdetails = <DishDetail dish={this.state.selectedDish} />;
+        }
 
 
         return (
@@ -22,6 +38,9 @@ class Menu extends Component {
                 <div className="row">
                     <div className="col-6">
                         {menu}
+                    </div>
+                    <div className="col-6">
+                        {dishdetails}
                     </div>
                 </div>
             </div>
