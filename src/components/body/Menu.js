@@ -10,11 +10,9 @@ class Menu extends Component {
     }
 
     DeshDetail = (dish) => {
-
         this.setState({
             selectedDish: dish
         });
-
 
     }
 
